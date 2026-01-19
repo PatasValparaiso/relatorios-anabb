@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Relatórios ANABB - VIREF</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+}
+
+/* TOPO */
+.header {
+  background: #12239E;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  border-bottom: 6px solid #D9B300;
+}
+
+.header img {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.header h1 {
+  margin: 5px 0;
+  font-size: 24px;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+/* LAYOUT */
+.container {
+  display: flex;
+}
+
+/* MENU LATERAL */
+.sidebar {
+  width: 260px;
+  background: #003787;
+  color: white;
+  min-height: calc(100vh - 120px);
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sidebar li:hover {
+  text-decoration: underline;
+}
+
+/* CONTEÚDO */
+.content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border: 3px solid #003787;
+  padding: 20px;
+  text-align: center;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #12239E;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.card a:hover {
+  background: #003787;
+}
+
+/* IFRAME */
+iframe {
+  width: 100%;
+  height: 800px;
+  border: none;
+}
+</style>
+
+<script>
+function carregarRelatorio(tipo) {
+  let area = document.getElementById("areaRelatorio");
+
+  if (tipo === 'calcenter') {
+    area.innerHTML = `
+      <h2>Relatórios Cal Center</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Cal Center - 2025</h3>
+          <a href="#" onclick="abrirBI()">Abrir Relatório</a>
+        </div>
+        <div class="card"><h3>Cal Center - 2024</h3><p>Em breve</p></div>
+        <div class="card"><h3>Cal Center - 2023</h3><p>Em breve</p></div>
+        <div class="card"><h3>Cal Center - 2022</h3><p>Em breve</p></div>
+      </div>
+    `;
+  } else {
+    area.innerHTML = "<h2>Conteúdo em construção</h2>";
+  }
+}
+
+function abrirBI() {
+  document.getElementById("areaRelatorio").innerHTML = `
+    <iframe src="https://app.powerbi.com/view?r=eyJrIjoiNjU0NzZjODQtMWRhNC00NjAxLTg3M2QtOTc0MDc1NjliNWMyIiwidCI6ImI4YzI1OTMyLTVlNzYtNGIyYi05YzUzLWQ0MTc0NWU5YzkyZCJ9"></iframe>
+  `;
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="header">
+  <img src="LOGO_ANABB.jpg">
+  <h1>RELATÓRIOS ANABB</h1>
+  <h2>VIREF</h2>
+</div>
+
+<div class="container">
+
+  <div class="sidebar">
+    <ul>
+      <li onclick="carregarRelatorio('calcenter')">Cal Center</li>
+      <li>Mensalidades</li>
+      <li>OdontoANABB</li>
+      <li>Retaguarda</li>
+      <li>Habilitação de herdeiros</li>
+      <li>Comunicado de Êxito</li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <div id="areaRelatorio">
+      <h2>Selecione um relatório no menu à esquerda</h2>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
