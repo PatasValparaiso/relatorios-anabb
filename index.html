@@ -43,25 +43,41 @@ body {
 
 /* MENU LATERAL */
 .sidebar {
-  width: 260px;
+  width: 280px;
   background: #003787;
   color: white;
   min-height: calc(100vh - 120px);
   padding: 20px;
 }
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
+.menu-group {
+  margin-bottom: 25px;
 }
 
-.sidebar li {
-  margin-bottom: 15px;
-  cursor: pointer;
+.menu-title {
   font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-size: 15px;
 }
 
-.sidebar li:hover {
+.menu-title:hover {
+  text-decoration: underline;
+}
+
+.menu-items {
+  list-style: none;
+  padding-left: 15px;
+  display: none;
+}
+
+.menu-items li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.menu-items li:hover {
   text-decoration: underline;
 }
 
@@ -69,6 +85,23 @@ body {
 .content {
   flex: 1;
   padding: 30px;
+  background: #ffffff;
+}
+
+/* HOME */
+.home-content {
+  text-align: center;
+}
+
+.home-content h2 {
+  margin-bottom: 25px;
+}
+
+.home-image {
+  max-width: 90%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 /* CARDS */
@@ -112,6 +145,11 @@ iframe {
 </style>
 
 <script>
+function toggleMenu(id) {
+  const menu = document.getElementById(id);
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
 function carregarRelatorio(tipo) {
   let area = document.getElementById("areaRelatorio");
 
@@ -153,19 +191,38 @@ function abrirBI() {
 <div class="container">
 
   <div class="sidebar">
-    <ul>
-      <li onclick="carregarRelatorio('calcenter')">Cal Center</li>
-      <li>Mensalidades</li>
-      <li>OdontoANABB</li>
-      <li>Retaguarda</li>
-      <li>Habilitação de herdeiros</li>
-      <li>Comunicado de Êxito</li>
-    </ul>
+
+    <div class="menu-group">
+      <div class="menu-title" onclick="toggleMenu('atendimento')">ATENDIMENTO</div>
+      <ul class="menu-items" id="atendimento">
+        <li onclick="carregarRelatorio('calcenter')">Cal Center</li>
+        <li>Presencial</li>
+        <li>Orientação Jurídica</li>
+        <li>Mensalidades</li>
+        <li>70+</li>
+      </ul>
+    </div>
+
+    <div class="menu-group">
+      <div class="menu-title" onclick="toggleMenu('servicos')">SERVIÇOS</div>
+      <ul class="menu-items" id="servicos">
+        <li>OdontoANABB</li>
+        <li>Filiações</li>
+        <li>Desfiliações</li>
+        <li>Reversão Desfiliação</li>
+        <li>Cobranças</li>
+        <li>Crédito de Ações Judiciais</li>
+        <li>Perda de Ações Judiciais</li>
+        <li>Habilitação de Herdeiros</li>
+      </ul>
+    </div>
+
   </div>
 
   <div class="content">
-    <div id="areaRelatorio">
+    <div id="areaRelatorio" class="home-content">
       <h2>Selecione um relatório no menu à esquerda</h2>
+      <img src="anabb-home.jpg" alt="ANABB 40 anos" class="home-image">
     </div>
   </div>
 
