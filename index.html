@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Painel Gerencial - Vice-presidente de Relações Funcionais - VIREF</title>
+<title>Painel Gerencial - VIREF</title>
 
 <style>
 body {
@@ -27,12 +27,12 @@ body {
 
 .header h1 {
   margin: 5px 0;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .header h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: normal;
 }
 
@@ -41,24 +41,20 @@ body {
   display: flex;
 }
 
-/* MENU LATERAL */
+/* MENU */
 .sidebar {
-  width: 280px;
+  width: 260px;
   background: #003787;
   color: white;
-  min-height: calc(100vh - 120px);
   padding: 20px;
-}
-
-.menu-group {
-  margin-bottom: 25px;
+  min-height: calc(100vh - 120px);
 }
 
 .menu-title {
   font-weight: bold;
+  margin-top: 20px;
   cursor: pointer;
-  margin-bottom: 10px;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .menu-title:hover {
@@ -66,15 +62,14 @@ body {
 }
 
 .menu-items {
-  list-style: none;
-  padding-left: 15px;
   display: none;
+  margin-top: 10px;
+  padding-left: 15px;
 }
 
 .menu-items li {
-  margin-bottom: 10px;
+  margin: 10px 0;
   cursor: pointer;
-  font-weight: normal;
 }
 
 .menu-items li:hover {
@@ -85,55 +80,20 @@ body {
 .content {
   flex: 1;
   padding: 30px;
-  background: #ffffff;
+  background: white;
 }
 
 /* HOME */
-.home-content {
+.home {
   text-align: center;
 }
 
-.home-content h2 {
-  margin-bottom: 25px;
-}
-
-.home-image {
-  max-width: 90%;
-  height: auto;
+/* IMAGENS */
+.img-painel {
+  width: 100%;
+  max-width: 1000px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-/* CARDS */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: white;
-  border: 3px solid #003787;
-  padding: 20px;
-  text-align: center;
-}
-
-.card h3 {
-  margin-top: 0;
-}
-
-.card a {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 15px;
-  background: #12239E;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.card a:hover {
-  background: #003787;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 /* IFRAME */
@@ -150,31 +110,38 @@ function toggleMenu(id) {
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-function carregarRelatorio(tipo) {
-  let area = document.getElementById("areaRelatorio");
+function carregar(tipo) {
+  let area = document.getElementById("conteudo");
 
-  if (tipo === 'calcenter') {
+  // CALL CENTER (POWER BI)
+  if (tipo === "callcenter") {
     area.innerHTML = `
-      <h2>Relatórios Cal Center</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>Cal Center - 2025</h3>
-          <a href="#" onclick="abrirBI()">Abrir Relatório</a>
-        </div>
-        <div class="card"><h3>Cal Center - 2024</h3><p>Em breve</p></div>
-        <div class="card"><h3>Cal Center - 2023</h3><p>Em breve</p></div>
-        <div class="card"><h3>Cal Center - 2022</h3><p>Em breve</p></div>
-      </div>
+      <h2>Call Center</h2>
+      <iframe src="https://app.powerbi.com/view?r=eyJrIjoiNjU0NzZjODQtMWRhNC00NjAxLTg3M2QtOTc0MDc1NjliNWMyIiwidCI6ImI4YzI1OTMyLTVlNzYtNGIyYi05YzUzLWQ0MTc0NWU5YzkyZCJ9"></iframe>
     `;
-  } else {
-    area.innerHTML = "<h2>Conteúdo em construção</h2>";
   }
-}
 
-function abrirBI() {
-  document.getElementById("areaRelatorio").innerHTML = `
-    <iframe src="https://app.powerbi.com/view?r=eyJrIjoiNjU0NzZjODQtMWRhNC00NjAxLTg3M2QtOTc0MDc1NjliNWMyIiwidCI6ImI4YzI1OTMyLTVlNzYtNGIyYi05YzUzLWQ0MTc0NWU5YzkyZCJ9"></iframe>
-  `;
+  // IMAGENS
+  if (tipo === "acoes") {
+    area.innerHTML = `
+      <h2>AÇÕES</h2>
+      <img src="Acoes1.jpg" class="img-painel">
+    `;
+  }
+
+  if (tipo === "associados") {
+    area.innerHTML = `
+      <h2>ASSOCIADOS</h2>
+      <img src="Associados1.jpg" class="img-painel">
+    `;
+  }
+
+  if (tipo === "financas") {
+    area.innerHTML = `
+      <h2>FINANÇAS</h2>
+      <img src="Financa1.jpg" class="img-painel">
+    `;
+  }
 }
 </script>
 
@@ -192,37 +159,29 @@ function abrirBI() {
 
   <div class="sidebar">
 
-    <div class="menu-group">
-      <div class="menu-title" onclick="toggleMenu('atendimento')">ATENDIMENTO</div>
-      <ul class="menu-items" id="atendimento">
-        <li onclick="carregarRelatorio('calcenter')">Cal Center</li>
-        <li>Presencial</li>
-        <li>Orientação Jurídica</li>
-        <li>Mensalidades</li>
-        <li>70+</li>
-      </ul>
+    <!-- RELATÓRIOS -->
+    <div class="menu-title" onclick="toggleMenu('relatorios')">
+      RELATÓRIOS
     </div>
+    <ul id="relatorios" class="menu-items">
+      <li onclick="carregar('callcenter')">Call Center</li>
+    </ul>
 
-    <div class="menu-group">
-      <div class="menu-title" onclick="toggleMenu('servicos')">SERVIÇOS</div>
-      <ul class="menu-items" id="servicos">
-        <li>OdontoANABB</li>
-        <li>Filiações</li>
-        <li>Desfiliações</li>
-        <li>Reversão Desfiliação</li>
-        <li>Cobranças</li>
-        <li>Crédito de Ações Judiciais</li>
-        <li>Perda de Ações Judiciais</li>
-        <li>Habilitação de Herdeiros</li>
-      </ul>
+    <!-- HERDEIROS -->
+    <div class="menu-title" onclick="toggleMenu('herdeiros')">
+      HABILITAÇÃO DE HERDEIROS
     </div>
+    <ul id="herdeiros" class="menu-items">
+      <li onclick="carregar('acoes')">AÇÕES</li>
+      <li onclick="carregar('associados')">ASSOCIADOS</li>
+      <li onclick="carregar('financas')">FINANÇAS</li>
+    </ul>
 
   </div>
 
   <div class="content">
-    <div id="areaRelatorio" class="home-content">
+    <div id="conteudo" class="home">
       <h2>Selecione um relatório no menu à esquerda</h2>
-      <img src="anabb-home.jpg" alt="ANABB 40 anos" class="home-image">
     </div>
   </div>
 
